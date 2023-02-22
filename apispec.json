@@ -12,7 +12,10 @@
   ],
   "paths": {
     "/login": {
+      "description": "Login Account",
       "post": {
+        "summary": "Login",
+        "description": "Login Account",
         "tags": ["User"],
         "requestBody": {
           "content": {
@@ -49,7 +52,9 @@
       }
     },
     "/register": {
+      "description": "Register Account",
       "post": {
+        "summary": "Register",
         "tags": ["User"],
         "requestBody": {
           "content": {
@@ -86,7 +91,9 @@
       }
     },
     "/logout": {
+      "description": "Logout Account",
       "get": {
+        "summary": "Logout",
         "tags": ["User"],
         "responses": {
           "200": {
@@ -111,7 +118,12 @@
       }
     },
     "/api/products": {
+
       "get": {
+        "security": [{
+          "UserAuth": []
+        }],
+        "summary": "Get All Product",
         "tags": ["Product"],
         "responses": {
           "200": {
@@ -138,6 +150,10 @@
         }
       },
       "post": {
+        "security": [{
+          "UserAuth": []
+        }],
+        "summary": "Create Product",
         "tags": ["Product"],
         "requestBody": {
           "content": {
@@ -175,6 +191,10 @@
     },
     "/api/products/productId": {
       "get": {
+        "security": [{
+          "UserAuth": []
+        }],
+        "summary": "Get Product by ID",
         "tags": ["Product"],
         "parameters": [
           {
@@ -208,6 +228,10 @@
         }
       },
       "delete": {
+        "security": [{
+          "UserAuth": []
+        }],
+        "summary": "Delete Product by Id",
         "tags": ["Product"],
         "parameters": [
           {
@@ -240,6 +264,10 @@
     },
     "/api/products?productCategory": {
       "get": {
+        "security": [{
+          "UserAuth": []
+        }],
+        "summary": "Get Product by Category",
         "tags": ["Product"],
         "parameters": [
           {
@@ -275,6 +303,10 @@
     },
     "/api/cart": {
       "get": {
+        "security": [{
+          "UserAuth": []
+        }],
+        "summary": "Get All Products in Cart",
         "tags": ["Chart"],
         "responses": {
           "200": {
@@ -301,6 +333,10 @@
         }
       },
       "post": {
+        "security": [{
+          "UserAuth": []
+        }],
+        "summary": "Insert Product to Cart",
         "tags": ["Chart"],
         "requestBody": {
           "content": {
@@ -338,6 +374,10 @@
     },
     "/api/cart/cartId": {
       "put": {
+        "security": [{
+          "UserAuth": []
+        }],
+        "summary": "Update amount product in cart",
         "tags": ["Chart"],
         "parameters": [
           {
@@ -385,6 +425,10 @@
         }
       },
       "delete": {
+        "security": [{
+          "UserAuth": []
+        }],
+        "summary": "Delete Product in Cart",
         "tags": ["Chart"],
         "responses": {
           "200": {
@@ -410,6 +454,10 @@
     },
     "/api/orders": {
       "get": {
+        "security": [{
+          "UserAuth": []
+        }],
+        "summary": "Get All User Order",
         "tags": ["Orders"],
         "responses": {
           "200": {
@@ -438,6 +486,10 @@
     },
     "/api/orders/checkout": {
       "get": {
+        "security": [{
+          "UserAuth": []
+        }],
+        "summary": "Checkout/Make Payment from Cart",
         "tags": ["Orders"],
         "responses": {
           "200": {
@@ -466,6 +518,14 @@
     }
   },
   "components": {
+    "securitySchemes": {
+      "UserAuth": {
+        "type": "token",
+        "in": "cookies",
+        "name": "JWT",
+        "description": "Authentication for API"
+      }
+    },
     "schemas": {
       "User": {
         "type": "object",
