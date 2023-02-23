@@ -4,9 +4,12 @@ services:
     container_name: full_app
     build: .
     ports: 
-      - 8080:3000 
+      - "8080:8080"
+      - "3000:3000"
     restart: on-failure
-    environment: 
+    environment:
+      - PORT=${PORT}
+      - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
     volumes:
@@ -20,7 +23,7 @@ services:
     image: mysql:5.7
     container_name: full_db_mysql    
     ports: 
-      - 3306:3306
+      - "3306:3306"
     environment: 
       - MYSQL_ROOT_HOST=${DB_HOST} 
       - MYSQL_USER=${DB_USER}
@@ -43,7 +46,7 @@ services:
       - PMA_PORT=${DB_PORT}
       - PMA_PASSWORD=${DB_PASSWORD}
     ports:
-      - 9090:80
+      - "9090:80"
     restart: always
     networks:
       - fullstack

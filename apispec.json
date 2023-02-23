@@ -60,7 +60,7 @@
           "content": {
             "application/json" : {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/Register"
               }
             }
           }
@@ -118,7 +118,6 @@
       }
     },
     "/api/products": {
-
       "get": {
         "security": [{
           "UserAuth": []
@@ -159,7 +158,7 @@
           "content": {
             "application/json" : {
               "schema": {
-                "$ref": "#/components/schemas/Product"
+                "$ref": "#/components/schemas/AddProduct"
               }
             }
           }
@@ -271,7 +270,7 @@
         "tags": ["Product"],
         "parameters": [
           {
-            "name": "productCategory",
+            "name": "category",
             "in": "query",
             "description": "Category"
           }
@@ -342,7 +341,7 @@
           "content": {
             "application/json" : {
               "schema": {
-                "$ref": "#/components/schemas/Cart"
+                "$ref": "#/components/schemas/AddCart"
               }
             }
           }
@@ -391,11 +390,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "properties": {
-                  "amount": {
-                    "type": "number"
-                  }
-                }
+                "$ref": "#/components/schemas/UpdateAmountCart"
               }
             }
           }
@@ -452,7 +447,7 @@
         }
       }
     },
-    "/api/orders": {
+    "/api/order": {
       "get": {
         "security": [{
           "UserAuth": []
@@ -484,7 +479,7 @@
         }
       }
     },
-    "/api/orders/checkout": {
+    "/api/order/checkout": {
       "get": {
         "security": [{
           "UserAuth": []
@@ -531,22 +526,28 @@
         "type": "object",
         "properties": {
           "userId": {
-            "type": "number"
+            "type": "number",
+            "example": 1
           },
           "username": {
-            "type": "string"
+            "type": "string",
+            "example": "Fachry"
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "example": "test"
           },
           "fullName": {
-            "type": "string"
+            "type": "string",
+            "example": "Fachry Ananta"
           },
           "address": {
-            "type": "string"
+            "type": "string",
+            "example": "Malang"
           },
           "phone": {
-            "type": "string"
+            "type": "string",
+            "example": "08124123412"
           }
         }
       },
@@ -554,19 +555,24 @@
         "type": "object",
         "properties": {
           "productId": {
-            "type": "number"
+            "type": "number",
+            "example": 2
           },
           "productName": {
-            "type": "string"
+            "type": "string",
+            "example": "HP Xiaomi"
           },
           "productCategory": {
-            "type": "string"
+            "type": "string",
+            "example": "hp, elektronik"
           },
           "productPrice": {
-            "type": "number"
+            "type": "number",
+            "example": 100000
           },
           "productStock": {
-            "type": "number"
+            "type": "number",
+            "example": 10
           }
         }
       },
@@ -574,19 +580,24 @@
         "type": "object",
         "properties": {
           "cartId": {
-            "type": "number"
+            "type": "number",
+            "example": 12
           },
           "productId": {
-            "type": "number"
+            "type": "number",
+            "example": 1
           },
           "userId": {
-            "type": "number"
+            "type": "number",
+            "example": 3
           },
           "amount": {
-            "type": "number"
+            "type": "number",
+            "example": 4
           },
           "totalPrice": {
-            "type": "number"
+            "type": "number",
+            "example": 4300000
           }
         }
       },
@@ -594,10 +605,12 @@
         "type": "object",
         "properties": {
           "username": {
-            "type": "string"
+            "type": "string",
+            "example": "test"
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "example": "test"
           }
         }
       },
@@ -605,19 +618,24 @@
         "type": "object",
         "properties": {
           "username": {
-            "type": "string"
+            "type": "string",
+            "example": "test"
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "example": "test"
           },
           "fullName": {
-            "type": "string"
+            "type": "string",
+            "example": "fachry anana"
           },
           "address": {
-            "type": "string"
+            "type": "string",
+            "example": "Malang"
           },
           "phone": {
-            "type": "string"
+            "type": "string",
+            "example": "081234132443"
           }
         }
       },
@@ -625,22 +643,71 @@
         "type": "object",
         "properties": {
           "orderId": {
-            "type": "number"
+            "type": "number",
+            "example": 12
           },
           "userId": {
-            "type": "number"
+            "type": "number",
+            "example": 3
           },
           "totalPrice": {
-            "type": "number"
+            "type": "number",
+            "example": 1000000
           },
           "fullName": {
-            "type": "string"
+            "type": "string",
+            "example": "Fachry Ananta"
           },
           "address": {
-            "type": "string"
+            "type": "string",
+            "example": "Malang"
           },
           "phone": {
-            "type": "string"
+            "type": "string",
+            "example": "08131341234"
+          }
+        }
+      },
+      "AddCart": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "number",
+            "example": 2
+          },
+          "amount": {
+            "type": "number",
+            "example": 3
+          }
+        }
+      },
+      "AddProduct": {
+        "type": "object",
+        "properties": {
+          "productName": {
+            "type": "string",
+            "example": "Laptop ASUS"
+          },
+          "productCategory": {
+            "type": "string",
+            "example": "laptop, elektronik"
+          },
+          "productPrice": {
+            "type": "number",
+            "example": 10000000
+          },
+          "productStock": {
+            "type": "number",
+            "example": 10
+          }
+        }
+      },
+      "UpdateAmountCart": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "example": 3
           }
         }
       }

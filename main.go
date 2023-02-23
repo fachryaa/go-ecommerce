@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/fachryaa/project-assignment-synapsis-ecommerce/controllers/authController"
 	"github.com/fachryaa/project-assignment-synapsis-ecommerce/controllers/cartController"
 	"github.com/fachryaa/project-assignment-synapsis-ecommerce/controllers/orderController"
@@ -10,6 +11,7 @@ import (
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -39,5 +41,11 @@ func main() {
 
 	api.Use(middlewares.JWTMiddleware)
 
-	log.Fatal(http.ListenAndServe("localhost:3000", r))
+	PORT := os.Getenv("PORT")
+	if PORT == "" {
+		PORT = "3000"
+	}
+	fmt.Println("Listening port :", PORT)
+
+	log.Fatal(http.ListenAndServe("0.0.0.0:"+PORT, r))
 }
